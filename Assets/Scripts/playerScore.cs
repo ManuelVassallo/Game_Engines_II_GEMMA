@@ -17,10 +17,28 @@ public class playerScore : MonoBehaviour
     public GameObject regularSpawner;
     public GameObject clockScripterObject;
 
+    private bool spawningCount;
+    private bool spawnAgain;
+    private bool spawnBonusAgain;
+
+
     public GameObject timeClockText;
+
+    public float totalTime;
+
+    public int clockSwitch = 0;
+
+    public GameObject clockCountdownObject;
+
+    public Text text;
+
+    private float minutes;
+    private float seconds;
 
 
     // Start is called before the first frame update
+
+
     void Awake()
     {
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
@@ -28,7 +46,11 @@ public class playerScore : MonoBehaviour
 
         chancesText = GameObject.Find("chancesText").GetComponent<Text>();
         chancesText.text = chances.ToString();
+    }
 
+    private void Start()
+    {
+        
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -36,14 +58,14 @@ public class playerScore : MonoBehaviour
         if(target.tag == "Bomb")
         {
             transform.position = new Vector2(0, 100);
-            target.gameObject.SetActive(false);
+            Destroy(target.gameObject);
             loseChance();
 
         }
 
         if(target.tag == "Fruit")
         {
-            target.gameObject.SetActive(false);
+            Destroy(target.gameObject);
             score++;
             checkBonusLevel();
             scoreText.text = score.ToString();
@@ -52,7 +74,7 @@ public class playerScore : MonoBehaviour
 
         if (target.tag == "Want")
         {
-            target.gameObject.SetActive(false);
+            Destroy(target.gameObject);
             score = score + 2;
             checkBonusLevel();
             scoreText.text = score.ToString();
@@ -88,21 +110,43 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel(float time)
     {
-        bonusLevelSpawner.SetActive(true);
-        regularSpawner.SetActive(false);
+        //bonusLevelSpawner.SetActive(true);
+        //regularSpawner.SetActive(false);
+        spawnBonusAgain = spawnerBonus.spawnBonusAgain = true;
+        Spawner.stopSpawning = true;
+
         timeClockText.SetActive(true);
+        clockSwitch = 1;
 
 
         yield return new WaitForSeconds(10);
 
+        //bonusLevelSpawner.SetActive(false);
+        //regularSpawner.SetActive(true);
+        spawnAgain = Spawner.spawnAgain = true;
+        spawnerBonus.stopSpawning = true;
+
+        clockSwitch = 0;
         timeClockText.SetActive(false);
-        bonusLevelSpawner.SetActive(false);
-        regularSpawner.SetActive(true);
+        totalTime = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (clockSwitch == 0)
+        {
+            
+        }
+
+        else if (clockSwitch == 1)
+        {
+            totalTime -= Time.deltaTime;
+
+            minutes = (int)(totalTime / 60);
+            seconds = (int)(totalTime % 60);
+
+            text.text = minutes.ToString() + " : " + seconds.ToString();
+        }
     }
 }

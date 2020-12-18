@@ -7,8 +7,20 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 92aa7adc24eede941a4097abac3d1368
+    guid: 556c9ec95bea5d94681f1426af821c81
+  - enabled: 1
+    path: Assets/Scenes/howToPlay.unity
+    guid: 96a3f9ebf84d00b41a65d7957643476a
+  - enabled: 1
+    path: Assets/Scenes/ExplanationStart.unity
+    guid: 9b42c3ef26a781e448ec9f6ab95983cd
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 113087c5e78f74440ace98cd0172275a
+  - enabled: 1
+    path: Assets/Scenes/ScoreScreen.unity
+    guid: 92aa7adc24eede941a4097abac3d1368
+  - enabled: 1
+    path: Assets/Scenes/ExplanationEnd.unity
+    guid: 8288d869e1d832944a25ffb081db68a6
   m_configObjects: {}
