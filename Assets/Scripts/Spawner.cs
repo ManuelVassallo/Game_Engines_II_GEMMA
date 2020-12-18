@@ -6,7 +6,6 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] fruits; //setting arrays for the needs and wants (sprites)
-    private GameObject[] wants;
 
     private BoxCollider2D col; //collider object
 

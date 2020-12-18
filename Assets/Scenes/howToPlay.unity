@@ -909,9 +909,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'memes memes memes memes memes memes memes memes memes memes memes memes
-    memes memes memes memes memes memes memes memes memes memes memes memes memes
-    memes memes memes memes memes memes memes memes memes memes memes memes '
+  m_Text: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+    ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum '
 --- !u!222 &2029080967
 CanvasRenderer:
   m_ObjectHideFlags: 0

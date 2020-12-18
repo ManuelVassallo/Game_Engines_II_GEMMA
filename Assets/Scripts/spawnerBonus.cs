@@ -5,11 +5,11 @@ using UnityEngine;
 public class spawnerBonus : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] wants;
+    private GameObject[] wants; //array of wants
 
-    private BoxCollider2D col;
+    private BoxCollider2D col; //collider initiated
 
-    float x1, x2;
+    float x1, x2; //boundaries
 
     public static bool stopSpawning = false;
 
@@ -22,7 +22,7 @@ public class spawnerBonus : MonoBehaviour
         
         col = GetComponent<BoxCollider2D>();
 
-        x1 = transform.position.x - col.bounds.size.x / 2f;
+        x1 = transform.position.x - col.bounds.size.x / 2f; //get the boundaries for the spawners
         x2 = transform.position.x + col.bounds.size.x / 2f; 
 
     }
@@ -36,10 +36,10 @@ public class spawnerBonus : MonoBehaviour
 
     public void spawnWants()
     {
-        Vector3 temp = transform.position;
+        Vector3 temp = transform.position; //get the boundaries
         temp.x = Random.Range(x1, x2);
 
-        Instantiate(wants[Random.Range(0, wants.Length)], temp, Quaternion.identity);
+        Instantiate(wants[Random.Range(0, wants.Length)], temp, Quaternion.identity); //spawning the wants at a random range and at restricted boundaries
 
 
         if (stopSpawning)
@@ -54,7 +54,6 @@ public class spawnerBonus : MonoBehaviour
     {
         if (stopSpawning == true)
         {
-            Debug.Log("checking for memes");
             CancelInvoke("spawnWants"); //if the variable is true then the loop ends
             stopSpawning = false;
         }
