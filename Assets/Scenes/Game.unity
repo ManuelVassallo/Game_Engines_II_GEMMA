@@ -182,6 +182,7 @@ MonoBehaviour:
   - {fileID: 7570380536458644357, guid: b905eabe599b34e49b38894fb6b9d523, type: 3}
   - {fileID: 8047449307716725125, guid: 1033749bf069c63418ab0845e465563d, type: 3}
   - {fileID: 2540552278700176857, guid: b70091dc6eb16d446a1c134fed495f8c, type: 3}
+  - {fileID: 2353949416382172859, guid: 52d0dad0c4facc943b9df63934aef554, type: 3}
 --- !u!61 &317936881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -512,6 +513,7 @@ MonoBehaviour:
   - {fileID: 2844039515326550289, guid: 3220809153d0e3d41a0757495afd738b, type: 3}
   - {fileID: 7731047383341611363, guid: af3f0ca642eee8648ba78d7e235ba801, type: 3}
   - {fileID: 3277690841210204732, guid: 32fa13179da1a31419b76453535a3123, type: 3}
+  - {fileID: 1061572211697889857, guid: 33b7a0291bf2b124489cff0479f85915, type: 3}
   - {fileID: 1061572211697889857, guid: 33b7a0291bf2b124489cff0479f85915, type: 3}
 --- !u!61 &599742204
 BoxCollider2D:
@@ -993,6 +995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7e6cec3066f0d4192dcc64f8d6d09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
+  speed: 12
 --- !u!1 &1421772012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,5 +1546,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 947467924849520820, guid: 9649cf7535175a440ba16d7cf34b3a33, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9649cf7535175a440ba16d7cf34b3a33, type: 3}

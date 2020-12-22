@@ -8,7 +8,7 @@ using System;
 public class playerScore : MonoBehaviour
 {
     private Text scoreText; //declaring score and chances text
-    private Text chancesText;
+    private Text chancesText; //declaring chances text
 
     private int score = 0;
     private int chances = 3; //variables for the score and chances
@@ -49,8 +49,7 @@ public class playerScore : MonoBehaviour
     {
         if(target.tag == "Bomb") //if player collides with bomb, destroy bomb and lose chance
         {
-            transform.position = new Vector2(0, 100);
-            Destroy(target.gameObject);
+            Destroy(target.gameObject);       
             loseChance();
 
         }
@@ -72,6 +71,23 @@ public class playerScore : MonoBehaviour
             
         }
 
+        if (target.tag == "Chance") //if player collides with a chance, recover a chance
+        {
+            Destroy(target.gameObject);
+            if (chances < 3)
+            {
+                chances = chances + 1;
+                chancesText.text = chances.ToString();
+
+            }
+
+            else
+            {
+                chancesText.text = chances.ToString();
+            }
+            
+
+        }
     }
 
     void endGame()
