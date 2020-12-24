@@ -54,7 +54,7 @@ public class playerScore : MonoBehaviour
 
         }
 
-        if(target.tag == "Fruit") //if player collides with a need, destroy need and give a point and check if player reached a specific amount of points to enter bonus phase
+        if(target.tag == "Need") //if player collides with a need, destroy need and give a point and check if player reached a specific amount of points to enter bonus phase
         {
             Destroy(target.gameObject);
             score++;
@@ -99,7 +99,17 @@ public class playerScore : MonoBehaviour
     {
         if (score == 5)
         {
-            StartCoroutine(changeToBonusLevel(5f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 25)
+        {
+            StartCoroutine(changeToBonusLevel(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 50)
+        {
+            StartCoroutine(changeToBonusLevel(1f));  //run coroutine to switch to bonus phase if certain points is reached    
         }
     }
 
@@ -148,7 +158,7 @@ public class playerScore : MonoBehaviour
             minutes = (int)(totalTime / 60);
             seconds = (int)(totalTime % 60);
 
-            text.text = minutes.ToString() + " : " + seconds.ToString();
+            text.text = "0" + minutes.ToString() + ":0" + seconds.ToString();
         }
     }
 }

@@ -12,7 +12,7 @@ public class Destroy : MonoBehaviour
 
         }
 
-        if (target.tag == "Fruit") //if a need, destroy
+        if (target.tag == "Need") //if a need, destroy
         {
             Destroy(target.gameObject);
 

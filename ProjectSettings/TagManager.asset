@@ -9,6 +9,7 @@ TagManager:
   - Want
   - Destroy
   - Chance
+  - Need
   layers:
   - Default
   - TransparentFX

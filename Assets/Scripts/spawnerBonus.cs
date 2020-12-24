@@ -15,6 +15,9 @@ public class spawnerBonus : MonoBehaviour
 
     public static bool spawnBonusAgain; //a global variable to determine if the spawner needs to work again or not
 
+    private float minSpawnTime = 1;
+    private float maxSpawnTime = 2;
+
 
 
     void Awake()
@@ -27,12 +30,6 @@ public class spawnerBonus : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Start()
-    {
-        //InvokeRepeating("spawnWants", 1f, 2f);
-
-    }
 
     public void spawnWants()
     {
@@ -41,13 +38,6 @@ public class spawnerBonus : MonoBehaviour
 
         Instantiate(wants[Random.Range(0, wants.Length)], temp, Quaternion.identity); //spawning the wants at a random range and at restricted boundaries
 
-
-        if (stopSpawning)
-        {
-            //CancelInvoke("spawnWants");
-            //stopSpawning = false;
-        }
-
     }
 
     private void Update()
@@ -55,12 +45,18 @@ public class spawnerBonus : MonoBehaviour
         if (stopSpawning == true)
         {
             CancelInvoke("spawnWants"); //if the variable is true then the loop ends
+
+            minSpawnTime = minSpawnTime - 0.15f;
+            maxSpawnTime = maxSpawnTime - .3f;
+
             stopSpawning = false;
+
+
         }
 
         if (spawnBonusAgain == true) //this update is constantly running to check if the spawnAgain is true which is turned on from the bonus Spawner script, then turned off again here
         {
-            InvokeRepeating("spawnWants", 1f, 2f); //re runs the function
+            InvokeRepeating("spawnWants", minSpawnTime, maxSpawnTime); //re runs the function
             spawnBonusAgain = false; //set back to false so the function doesnt run more than once
         }
     }

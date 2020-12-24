@@ -65,10 +65,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Destroy.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
+    <Compile Include="Assets\Scripts\needSpawner.cs" />
+    <Compile Include="Assets\Scripts\onSpawn.cs" />
     <Compile Include="Assets\Scripts\playerScore.cs" />
     <Compile Include="Assets\Scripts\sceneManager.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\spawnerBonus.cs" />
+    <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/6.3A/Game Engines/Shop Drop/Game_Engines_II_GEMMA/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
