@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 473019376869393652}
   - component: {fileID: 473019376869393653}
   - component: {fileID: 473019376869393650}
-  - component: {fileID: 473019376869393651}
   m_Layer: 0
   m_Name: Apple_PNG
   m_TagString: Need
@@ -97,7 +96,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 17.539999
+  m_Radius: 8.7
 --- !u!50 &473019376869393650
 Rigidbody2D:
   serializedVersion: 4
@@ -119,18 +118,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &473019376869393651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473019376869393648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b91f2dc7c65d78499df89de89a97772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  AngularSpeed: 0
-  startForce: 10

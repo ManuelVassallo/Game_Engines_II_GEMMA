@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class needSpawner : MonoBehaviour
 {
-    public GameObject needPrefab;
+    public GameObject[] needPrefab;
     public Transform[] spawnPoints;
 
-    public float minDelay = .1f;
-    public float maxDelay = 1f;
+    public float minDelay = 1f;
+    public float maxDelay = 2f;
 
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class needSpawner : MonoBehaviour
             int spawnIndex = Random.Range(0, spawnPoints.Length);
             Transform spawnPoint = spawnPoints[spawnIndex];
 
-            Instantiate(needPrefab, spawnPoint.position, spawnPoint.rotation);
+            Instantiate(needPrefab[Random.Range(0, needPrefab.Length)], spawnPoint.position, spawnPoint.rotation);
         }
     }
 }
