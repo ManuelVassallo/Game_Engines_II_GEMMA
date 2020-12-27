@@ -38,13 +38,13 @@ public class Movement : MonoBehaviour
     {
         Vector3 mouse = cam.ScreenToWorldPoint(Input.mousePosition);
         mouseX = mouse.x;
-        if (mouseX < -10.48f) //If reaches far left, keep the player stuck there unless moving other direction
+        if (mouseX < -7.5f) //If reaches far left, keep the player stuck there unless moving other direction
         {
-            mouseX = -10.48f;
+            mouseX = -7.5f;
         }
-        if (mouseX > 10.46f) //If reaches far right, keep the player stuck there unless moving other direction
+        if (mouseX > 7.5f) //If reaches far right, keep the player stuck there unless moving other direction
         {
-            mouseX = 10.46f;
+            mouseX = 7.5f;
         }
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(mouseX, transform.position.y, transform.position.z), speed * Time.deltaTime); //move towards mouse position with the use of time and speed
     }

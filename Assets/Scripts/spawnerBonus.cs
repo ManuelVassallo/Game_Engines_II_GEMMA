@@ -46,8 +46,8 @@ public class spawnerBonus : MonoBehaviour
         {
             CancelInvoke("spawnWants"); //if the variable is true then the loop ends
 
-           // minSpawnTime = minSpawnTime - 0.15f;
-            //maxSpawnTime = maxSpawnTime - .3f;
+            minSpawnTime = minSpawnTime - 0.1f;
+            maxSpawnTime = maxSpawnTime - .2f;
 
             stopSpawning = false;
 

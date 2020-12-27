@@ -10,7 +10,7 @@ public class playerScore : MonoBehaviour
     private Text scoreText; //declaring score and chances text
     private Text chancesText; //declaring chances text
 
-    private int score = 0;
+    public static int score = 0;
     private int chances = 3; //variables for the score and chances
 
     public GameObject bonusLevelSpawner; //the game objects initiated
@@ -107,9 +107,34 @@ public class playerScore : MonoBehaviour
             StartCoroutine(changeToBonusLevel2(1f));  //run coroutine to switch to bonus phase if certain points is reached    
         }
 
-        else if (score == 50)
+        else if (score == 70)
         {
             StartCoroutine(changeToBonusLevel3(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 120)
+        {
+            StartCoroutine(changeToBonusLevel4(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 175)
+        {
+            StartCoroutine(changeToBonusLevel5(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 250)
+        {
+            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 320)
+        {
+            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+        }
+
+        else if (score == 400)
+        {
+            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached    
         }
     }
 
@@ -129,7 +154,6 @@ public class playerScore : MonoBehaviour
     {
         spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
-        //Spawner2.spawnAgain = true; 
 
 
         timeClockText.SetActive(true); //updating the tick tock clock
@@ -162,10 +186,11 @@ public class playerScore : MonoBehaviour
         yield return new WaitForSeconds(10); //for 10 seconds the bonus phase will last
 
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
-        //Spawner2.stopSpawning = true; 
-        //Spawner3.stopSpawning = true; 
+        Spawner2.spawnAgain = true; 
         spawnerBonus.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
         spawnerBonus2.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
+
+        bombSpawner.spawnAgain = true;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -177,8 +202,14 @@ public class playerScore : MonoBehaviour
     IEnumerator changeToBonusLevel3(float time) //ienumerator to change to bonus phase
     {
         spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
+        spawnerBonus2.spawnBonusAgain = true;
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
-        //Spawner2.spawnAgain = true; 
+        Spawner2.stopSpawning = true;
+
+        bombSpawner.stopSpawning = true;
+        hatSpawner.spawnAgain = true;
+
 
 
         timeClockText.SetActive(true); //updating the tick tock clock
@@ -187,8 +218,130 @@ public class playerScore : MonoBehaviour
         yield return new WaitForSeconds(10); //for 10 seconds the bonus phase will last
 
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
-        //Spawner2.stopSpawning = true; 
+        Spawner2.spawnAgain = true;
+        Spawner3.spawnAgain = true;
+
         spawnerBonus.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
+        spawnerBonus2.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
+
+        bombSpawner.spawnAgain = true;
+
+        clockSwitch = 0; //switching
+        timeClockText.SetActive(false);
+
+
+        totalTime = 10; //resetting the tick tock clock
+    }
+
+    IEnumerator changeToBonusLevel4(float time) //ienumerator to change to bonus phase
+    {
+        spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
+        spawnerBonus2.spawnBonusAgain = true;
+        spawnerBonus3.spawnBonusAgain = true;
+
+
+        Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
+        Spawner2.stopSpawning = true;
+        Spawner3.stopSpawning = true;
+
+
+        bombSpawner.stopSpawning = true;
+
+
+
+        timeClockText.SetActive(true); //updating the tick tock clock
+        clockSwitch = 1; //switching
+
+        yield return new WaitForSeconds(10); //for 10 seconds the bonus phase will last
+
+        Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
+        Spawner2.spawnAgain = true;
+        Spawner3.spawnAgain = true;
+
+        spawnerBonus.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
+        spawnerBonus2.stopSpawning = true; 
+        spawnerBonus3.stopSpawning = true; 
+
+        bombSpawner.spawnAgain = true;
+
+        clockSwitch = 0; //switching
+        timeClockText.SetActive(false);
+
+
+        totalTime = 10; //resetting the tick tock clock
+    }
+
+    IEnumerator changeToBonusLevel5(float time) //ienumerator to change to bonus phase
+    {
+        spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
+        spawnerBonus2.spawnBonusAgain = true;
+        spawnerBonus3.spawnBonusAgain = true;
+
+
+        Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
+        Spawner2.stopSpawning = true;
+        Spawner3.stopSpawning = true;
+
+
+        bombSpawner.stopSpawning = true;
+
+
+
+        timeClockText.SetActive(true); //updating the tick tock clock
+        clockSwitch = 1; //switching
+
+        yield return new WaitForSeconds(10); //for 10 seconds the bonus phase will last
+
+        Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
+        Spawner2.spawnAgain = true;
+        Spawner3.spawnAgain = true;
+
+        spawnerBonus.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
+        spawnerBonus2.stopSpawning = true;
+        spawnerBonus3.stopSpawning = true;
+
+        bombSpawner.spawnAgain = true;
+        bombSpawner2.spawnAgain = true;
+
+        clockSwitch = 0; //switching
+        timeClockText.SetActive(false);
+
+
+        totalTime = 10; //resetting the tick tock clock
+    }
+
+    IEnumerator changeToBonusLevel6(float time) //ienumerator to change to bonus phase
+    {
+        spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
+        spawnerBonus2.spawnBonusAgain = true;
+        spawnerBonus3.spawnBonusAgain = true;
+
+
+        Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
+        Spawner2.stopSpawning = true;
+        Spawner3.stopSpawning = true;
+
+
+        bombSpawner.stopSpawning = true;
+        bombSpawner2.stopSpawning = true;
+
+
+
+        timeClockText.SetActive(true); //updating the tick tock clock
+        clockSwitch = 1; //switching
+
+        yield return new WaitForSeconds(10); //for 10 seconds the bonus phase will last
+
+        Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
+        Spawner2.spawnAgain = true;
+        Spawner3.spawnAgain = true;
+
+        spawnerBonus.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
+        spawnerBonus2.stopSpawning = true;
+        spawnerBonus3.stopSpawning = true;
+
+        bombSpawner.spawnAgain = true;
+        bombSpawner2.spawnAgain = true;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
