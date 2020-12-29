@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\bombSpawner.cs" />
     <Compile Include="Assets\Scripts\bombSpawner2.cs" />
     <Compile Include="Assets\Scripts\Destroy.cs" />
+    <Compile Include="Assets\Scripts\fadeIn.cs" />
     <Compile Include="Assets\Scripts\hatSpawner.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\needSpawner.cs" />

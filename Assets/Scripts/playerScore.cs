@@ -17,9 +17,13 @@ public class playerScore : MonoBehaviour
     public GameObject regularSpawner;
     public GameObject clockScripterObject;
 
+    public Image goldBorder;
+
     private bool spawningCount; //booleans for swapping of phases
     private bool spawnAgain;
     private bool spawnBonusAgain;
+
+    private bool paused = false;
 
 
     public GameObject timeClockText; //stopwatch initiated
@@ -30,6 +34,12 @@ public class playerScore : MonoBehaviour
 
     public GameObject clockCountdownObject;
 
+    public GameObject chipHat1;
+    public GameObject chipHat2;
+    public GameObject chipHat3;
+
+    public GameObject pauseText;
+
     public Text text;
 
     private float minutes;
@@ -38,11 +48,17 @@ public class playerScore : MonoBehaviour
 
     void Awake()
     {
+        goldBorder.canvasRenderer.SetAlpha(0.0f);
+
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>(); //get the score and chances objects
         scoreText.text = "0";
 
-        chancesText = GameObject.Find("chancesText").GetComponent<Text>();
-        chancesText.text = chances.ToString();
+        
+    }
+
+    void fadeInFunction()
+    {
+        StartCoroutine(fadeInFadeOut(1f));   
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -74,19 +90,22 @@ public class playerScore : MonoBehaviour
         if (target.tag == "Chance") //if player collides with a chance, recover a chance
         {
             Destroy(target.gameObject);
-            if (chances < 3)
+            if (chances == 2)
             {
                 chances = chances + 1;
-                chancesText.text = chances.ToString();
+                chipHat3.gameObject.SetActive(true);
+            }
 
+            else if(chances == 1)
+            {
+                chances = chances + 1;
+                chipHat2.gameObject.SetActive(true);
             }
 
             else
             {
-                chancesText.text = chances.ToString();
+                
             }
-            
-
         }
     }
 
@@ -98,43 +117,51 @@ public class playerScore : MonoBehaviour
     void checkBonusLevel()
     {
         if (score == 5)
-        {
+        {         
             StartCoroutine(changeToBonusLevel1(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            fadeInFunction();
         }
 
         else if (score == 25)
         {
-            StartCoroutine(changeToBonusLevel2(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel2(1f));  //run coroutine to switch to bonus phase if certain points is reached  
+            fadeInFunction();
         }
 
         else if (score == 70)
         {
-            StartCoroutine(changeToBonusLevel3(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel3(1f));  //run coroutine to switch to bonus phase if certain points is reached 
+            fadeInFunction();
         }
 
         else if (score == 120)
         {
-            StartCoroutine(changeToBonusLevel4(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel4(1f));  //run coroutine to switch to bonus phase if certain points is reached  
+            fadeInFunction();
         }
 
         else if (score == 175)
         {
-            StartCoroutine(changeToBonusLevel5(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel5(1f));  //run coroutine to switch to bonus phase if certain points is reached   
+            fadeInFunction();
         }
 
         else if (score == 250)
         {
-            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached   
+            fadeInFunction();
         }
 
         else if (score == 320)
         {
             StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            fadeInFunction();
         }
 
         else if (score == 400)
         {
-            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached    
+            StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached  
+            fadeInFunction();
         }
     }
 
@@ -142,12 +169,47 @@ public class playerScore : MonoBehaviour
     void loseChance() //lose a chance variable and update the text
     {
         chances = chances - 1;
-        chancesText.text = chances.ToString();
+        if (chances == 2)
+        {
+            chipHat3.gameObject.SetActive(false);
+        }
 
-        if (chances == 0)
+        else if (chances == 1)
+        {
+            chipHat2.gameObject.SetActive(false);
+        }
+
+        else if (chances == 0)
         {
             endGame(); //end the game if 0
-        }       
+        }         
+    }
+
+    IEnumerator fadeInFadeOut(float time) //ienumerator to change to bonus phase
+    {
+        goldBorder.CrossFadeAlpha(0.75f, 1, false);
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0f, 1, false);
+
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0.75f, 1, false);
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0f, 1, false);
+
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0.75f, 1, false);
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0f, 1, false);
+
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0.75f, 1, false);
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0f, 1, false);
+
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0.75f, 1, false);
+        yield return new WaitForSeconds(1); //for 2 seconds the bonus phase will last
+        goldBorder.CrossFadeAlpha(0f, 1, false);
     }
 
     IEnumerator changeToBonusLevel1(float time) //ienumerator to change to bonus phase
@@ -351,9 +413,21 @@ public class playerScore : MonoBehaviour
     }
     void Update()
     {
-        if (clockSwitch == 0) //ticking down the stopwatch on update
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            if (paused == false)
+            {
+                paused = true;
+                pauseText.gameObject.SetActive(true);
+                Time.timeScale = 0;
+            }
+
+            else if (paused == true)
+            {
+                paused = false;
+                pauseText.gameObject.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
 
         else if (clockSwitch == 1)
@@ -365,5 +439,7 @@ public class playerScore : MonoBehaviour
 
             text.text = "0" + minutes.ToString() + ":0" + seconds.ToString();
         }
+
+        
     }
 }
