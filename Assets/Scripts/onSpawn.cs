@@ -12,7 +12,7 @@ public class onSpawn : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        int startForceRandom = Random.Range(5, 11);
+        int startForceRandom = Random.Range(5, 10);
         rb.AddForce(transform.up * startForceRandom, ForceMode2D.Impulse );
 
         rb.AddTorque(10, ForceMode2D.Impulse);

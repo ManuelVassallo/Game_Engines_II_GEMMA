@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\bombSpawner.cs" />
     <Compile Include="Assets\Scripts\bombSpawner2.cs" />
+    <Compile Include="Assets\Scripts\bombSpawner3.cs" />
     <Compile Include="Assets\Scripts\Destroy.cs" />
     <Compile Include="Assets\Scripts\fadeIn.cs" />
     <Compile Include="Assets\Scripts\hatSpawner.cs" />
@@ -77,9 +78,11 @@
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Spawner2.cs" />
     <Compile Include="Assets\Scripts\Spawner3.cs" />
+    <Compile Include="Assets\Scripts\Spawner4.cs" />
     <Compile Include="Assets\Scripts\spawnerBonus.cs" />
     <Compile Include="Assets\Scripts\spawnerBonus2.cs" />
     <Compile Include="Assets\Scripts\spawnerBonus3.cs" />
+    <Compile Include="Assets\Scripts\spawnerBonus4.cs" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/6.3A/Game Engines/Shop Drop/Game_Engines_II_GEMMA/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
