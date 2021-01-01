@@ -24,5 +24,11 @@ public class Destroy : MonoBehaviour
 
         }
 
+        if (target.tag == "Chance") //if a want, destroy
+        {
+            Destroy(target.gameObject);
+
+        }
+
     }
 }

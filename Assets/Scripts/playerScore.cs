@@ -10,6 +10,13 @@ public class playerScore : MonoBehaviour
     private Text scoreText; //declaring score and chances text
     private Text chancesText; //declaring chances text
 
+    public Animator hatAnimator;
+    public Animator hatAnimator2;
+
+    public Animator foodAnimator;
+
+
+
     public static int score = 0;
     private int chances = 3; //variables for the score and chances
 
@@ -32,6 +39,8 @@ public class playerScore : MonoBehaviour
 
     private bool paused = false;
 
+    private bool isImmune = false;
+
 
     public GameObject timeClockText; //stopwatch initiated
 
@@ -44,6 +53,8 @@ public class playerScore : MonoBehaviour
     public GameObject chipHat1;
     public GameObject chipHat2;
     public GameObject chipHat3;
+
+    public GameObject chipTheMonkey;
 
     public GameObject pauseText;
 
@@ -59,13 +70,6 @@ public class playerScore : MonoBehaviour
 
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>(); //get the score and chances objects
         scoreText.text = "0";
-
-        
-    }
-
-    private void Start()
-    {
-       
     }
 
     void fadeInFunction()
@@ -77,9 +81,18 @@ public class playerScore : MonoBehaviour
     {
         if(target.tag == "Bomb") //if player collides with bomb, destroy bomb and lose chance
         {
-            Destroy(target.gameObject);       
-            loseChance();
+            Destroy(target.gameObject);  
+            if (isImmune == false)
+            {
+                loseChance();
+                StartCoroutine(isNowImmune(1f));
+                StartCoroutine(isNowImmuneFlashing(1f));
+            }
 
+            else
+            {
+
+            }
         }
 
         if(target.tag == "Need") //if player collides with a need, destroy need and give a point and check if player reached a specific amount of points to enter bonus phase
@@ -106,13 +119,13 @@ public class playerScore : MonoBehaviour
             if (chances == 2)
             {
                 chances = chances + 1;
-                chipHat3.gameObject.SetActive(true);
+                StartCoroutine(getHatAnimation2(1f));
             }
 
             else if(chances == 1)
             {
                 chances = chances + 1;
-                chipHat2.gameObject.SetActive(true);
+                StartCoroutine(getHatAnimation1(1f));
             }
 
             else
@@ -184,18 +197,55 @@ public class playerScore : MonoBehaviour
         }
     }
 
+    IEnumerator shrinkFoodAnimation(float time) //ienumerator to change to bonus phase
+    {
+        foodAnimator.SetBool("isTriggered", true);
+        yield return new WaitForSeconds(0.75f);
+    }
+
+    IEnumerator lostHatAnimation(float time) //ienumerator to change to bonus phase
+    {
+        hatAnimator.SetBool("lostLifeAnim", true);
+        yield return new WaitForSeconds(0.75f);
+    }
+
+    IEnumerator getHatAnimation2(float time) //ienumerator to change to bonus phase
+    {
+        
+        hatAnimator.SetBool("getLifeAnim", true);
+        yield return new WaitForSeconds(0.75f);
+        hatAnimator.SetBool("getLifeAnim", false);
+        hatAnimator.SetBool("lostLifeAnim", false);
+    }
+
+    IEnumerator getHatAnimation1(float time) //ienumerator to change to bonus phase
+    {
+        hatAnimator2.SetBool("getLifeAnim", true);
+        yield return new WaitForSeconds(0.75f);
+        hatAnimator2.SetBool("getLifeAnim", false);
+        hatAnimator2.SetBool("lostLifeAnim", false);
+    }
+
+    IEnumerator lostHatAnimation2(float time) //ienumerator to change to bonus phase
+    {
+        hatAnimator2.SetBool("lostLifeAnim", true);
+        yield return new WaitForSeconds(0.75f);
+    }
+
 
     void loseChance() //lose a chance variable and update the text
     {
+        
         chances = chances - 1;
         if (chances == 2)
         {
-            chipHat3.gameObject.SetActive(false);
+            StartCoroutine(lostHatAnimation(1f));        
         }
 
         else if (chances == 1)
         {
-            chipHat2.gameObject.SetActive(false);
+            StartCoroutine(lostHatAnimation2(1f));
+            
         }
 
         else if (chances == 0)
@@ -204,7 +254,49 @@ public class playerScore : MonoBehaviour
         }         
     }
 
-    
+    IEnumerator isNowImmuneFlashing(float time) //ienumerator to change to bonus phase
+    {
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.25f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(.15f);
+        chipTheMonkey.GetComponent<Renderer>().material.color = Color.white;
+
+    }
+
+
+    IEnumerator isNowImmune(float time) //ienumerator to change to bonus phase
+    {     
+        isImmune = true;
+        yield return new WaitForSeconds(3);
+        isImmune = false;
+    }
 
     IEnumerator fadeInFadeOut(float time) //ienumerator to change to bonus phase
     {
