@@ -15,6 +15,15 @@ public class playerScore : MonoBehaviour
 
     public Animator foodAnimator;
 
+    public Animator scoreAnimator;
+
+    public Animator bonusMusicAnim;
+
+    private AudioSource hurtNoise;
+    private AudioSource itemNoise;
+    private AudioSource chanceNoise;
+    private AudioSource bonusMusic;
+    private AudioSource musicBox;
 
 
     public static int score = 0;
@@ -66,10 +75,19 @@ public class playerScore : MonoBehaviour
 
     void Awake()
     {
+        
         goldBorder.canvasRenderer.SetAlpha(0.0f);
 
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>(); //get the score and chances objects
         scoreText.text = "0";
+
+        hurtNoise = GameObject.FindGameObjectWithTag("HurtSound").GetComponent<AudioSource>();
+        itemNoise = GameObject.FindGameObjectWithTag("ItemSound").GetComponent<AudioSource>();
+        chanceNoise = GameObject.FindGameObjectWithTag("ChanceSound").GetComponent<AudioSource>();
+        bonusMusic = GameObject.FindGameObjectWithTag("BonusSound").GetComponent<AudioSource>();
+        musicBox = GameObject.FindGameObjectWithTag("musicBox").GetComponent<AudioSource>();
+
+        musicBox.Play();
     }
 
     void fadeInFunction()
@@ -84,6 +102,7 @@ public class playerScore : MonoBehaviour
             Destroy(target.gameObject);  
             if (isImmune == false)
             {
+                hurtNoise.Play();
                 loseChance();
                 StartCoroutine(isNowImmune(1f));
                 StartCoroutine(isNowImmuneFlashing(1f));
@@ -97,7 +116,9 @@ public class playerScore : MonoBehaviour
 
         if(target.tag == "Need") //if player collides with a need, destroy need and give a point and check if player reached a specific amount of points to enter bonus phase
         {
+            itemNoise.Play();
             Destroy(target.gameObject);
+            scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
             score++;
             checkBonusLevel();
             scoreText.text = score.ToString();
@@ -107,14 +128,18 @@ public class playerScore : MonoBehaviour
 
         if (target.tag == "Want") //if player collides with a want, more points is awarded
         {
+            itemNoise.Play();
             Destroy(target.gameObject);
+            scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
             score = score + 2;
             scoreText.text = score.ToString();
+
             
         }
 
         if (target.tag == "Chance") //if player collides with a chance, recover a chance
         {
+            chanceNoise.Play();
             Destroy(target.gameObject);
             if (chances == 2)
             {
@@ -327,6 +352,10 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel1(float time) //ienumerator to change to bonus phase
     {
+
+        //bonusMusicAnim.Play("Base Layer.audioFadeIn3", 0, 2f);
+        bonusMusic.Play();
+        musicBox.Pause();
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last
@@ -346,6 +375,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last  
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain= true;      
 
@@ -360,6 +392,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel2(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
 
@@ -382,7 +417,10 @@ public class playerScore : MonoBehaviour
 
         popUpPrefab4.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last  
+        yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
+
+        bonusMusic.Pause();
+        musicBox.Play();
 
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true; 
@@ -398,6 +436,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel3(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         bombSpawner.stopSpawning = true;
@@ -426,6 +467,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last  
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;
         Spawner3.spawnAgain = true; 
@@ -441,6 +485,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel4(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         Spawner3.stopSpawning = true;
@@ -471,6 +518,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;
         Spawner3.spawnAgain = true;
@@ -485,6 +535,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel5(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         Spawner3.stopSpawning = true;
@@ -515,6 +568,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;
         Spawner3.spawnAgain = true;
@@ -530,6 +586,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel6(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         Spawner3.stopSpawning = true;
@@ -561,6 +620,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;
         Spawner3.spawnAgain = true;
@@ -577,6 +639,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel7(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         Spawner3.stopSpawning = true;
@@ -585,6 +650,7 @@ public class playerScore : MonoBehaviour
         bombSpawner3.stopSpawning = true;
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last
+
         fadeInFunction();
 
         spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
@@ -609,6 +675,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;
         Spawner3.spawnAgain = true;
@@ -626,6 +695,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel8(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         Spawner3.stopSpawning = true;
@@ -635,6 +707,7 @@ public class playerScore : MonoBehaviour
         bombSpawner3.stopSpawning = true;
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last
+
         fadeInFunction();
 
         spawnerBonus.spawnBonusAgain = true; //this will grab from another script and change it to true to start the bonus spawner
@@ -661,6 +734,9 @@ public class playerScore : MonoBehaviour
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
 
+        bonusMusic.Pause();
+        musicBox.Play();
+
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;
         Spawner3.spawnAgain = true;
@@ -678,6 +754,9 @@ public class playerScore : MonoBehaviour
 
     IEnumerator changeToBonusLevel9(float time) //ienumerator to change to bonus phase
     {
+        bonusMusic.Play();
+        musicBox.Pause();
+
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
         Spawner3.stopSpawning = true;
@@ -712,6 +791,9 @@ public class playerScore : MonoBehaviour
         popUpPrefab5.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
+
+        bonusMusic.Pause();
+        musicBox.Play();
 
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
         Spawner2.spawnAgain = true;

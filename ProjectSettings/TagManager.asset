@@ -10,6 +10,11 @@ TagManager:
   - Destroy
   - Chance
   - Need
+  - HurtSound
+  - ItemSound
+  - ChanceSound
+  - BonusSound
+  - musicBox
   layers:
   - Default
   - TransparentFX
