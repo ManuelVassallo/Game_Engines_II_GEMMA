@@ -15,6 +15,16 @@ TagManager:
   - ChanceSound
   - BonusSound
   - musicBox
+  - buttonHowTo
+  - buttonHelp
+  - buttonPlay
+  - buttonSoundHover
+  - buttonHoverSound
+  - buttonClickSound
+  - buttonBack
+  - nextButton
+  - againButton
+  - menuButton
   layers:
   - Default
   - TransparentFX

@@ -66,6 +66,7 @@ public class playerScore : MonoBehaviour
     public GameObject chipTheMonkey;
 
     public GameObject pauseText;
+    public GameObject startText;
 
     public Text text;
 
@@ -88,7 +89,10 @@ public class playerScore : MonoBehaviour
         musicBox = GameObject.FindGameObjectWithTag("musicBox").GetComponent<AudioSource>();
 
         musicBox.Play();
+
+        
     }
+
 
     void fadeInFunction()
     {
@@ -783,7 +787,7 @@ public class playerScore : MonoBehaviour
         spawnerBonus.stopSpawning = true; //this will tell the bonus spawner to stop spawning in another script
         spawnerBonus2.stopSpawning = true;
         spawnerBonus3.stopSpawning = true;
-        spawnerBonus3.stopSpawning = true;
+        spawnerBonus4.stopSpawning = true;
 
         popUpPrefab3.gameObject.SetActive(false);
         popUpPrefab6.gameObject.SetActive(true);
