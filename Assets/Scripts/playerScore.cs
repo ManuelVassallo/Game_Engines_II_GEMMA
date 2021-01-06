@@ -10,6 +10,8 @@ public class playerScore : MonoBehaviour
     private Text scoreText; //declaring score and chances text
     private Text chancesText; //declaring chances text
 
+    public static bool playingAgain = false;
+
     public Animator hatAnimator;
     public Animator hatAnimator2;
 
@@ -39,6 +41,9 @@ public class playerScore : MonoBehaviour
     public GameObject popUpPrefab4;
     public GameObject popUpPrefab5;
     public GameObject popUpPrefab6;
+
+    public GameObject normalBackground;
+    public GameObject bonusBackground;
 
     public Image goldBorder;
 
@@ -76,27 +81,28 @@ public class playerScore : MonoBehaviour
 
     void Awake()
     {
-        
+        //Debug.Log(musicSceneChange2.scoreScreenStartedPlaying);
         goldBorder.canvasRenderer.SetAlpha(0.0f);
 
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>(); //get the score and chances objects
         scoreText.text = "0";
+        score = 0;
 
-        hurtNoise = GameObject.FindGameObjectWithTag("HurtSound").GetComponent<AudioSource>();
+        hurtNoise = GameObject.FindGameObjectWithTag("HurtSound").GetComponent<AudioSource>(); //getting audio sources from game objects
         itemNoise = GameObject.FindGameObjectWithTag("ItemSound").GetComponent<AudioSource>();
         chanceNoise = GameObject.FindGameObjectWithTag("ChanceSound").GetComponent<AudioSource>();
         bonusMusic = GameObject.FindGameObjectWithTag("BonusSound").GetComponent<AudioSource>();
         musicBox = GameObject.FindGameObjectWithTag("musicBox").GetComponent<AudioSource>();
 
         musicBox.Play();
-
         
+
     }
 
 
     void fadeInFunction()
     {
-        StartCoroutine(fadeInFadeOut(1f));   
+        StartCoroutine(fadeInFadeOut(1f));   //gold fade fro mbonus phase
     }
 
     void OnTriggerEnter2D(Collider2D target)
@@ -104,7 +110,7 @@ public class playerScore : MonoBehaviour
         if(target.tag == "Bomb") //if player collides with bomb, destroy bomb and lose chance
         {
             Destroy(target.gameObject);  
-            if (isImmune == false)
+            if (isImmune == false) //if player is not immune then lose a chance
             {
                 hurtNoise.Play();
                 loseChance();
@@ -126,6 +132,7 @@ public class playerScore : MonoBehaviour
             score++;
             checkBonusLevel();
             scoreText.text = score.ToString();
+
             
 
         }
@@ -175,6 +182,8 @@ public class playerScore : MonoBehaviour
         {         
             StartCoroutine(changeToBonusLevel1(1f));  //run coroutine to switch to bonus phase if certain points is reached    
             popUpPrefab1.gameObject.SetActive(true);
+            musicSceneChange2.scoreScreenStartedPlaying = false;
+            musicSceneChange.mainMenuStartedPlaying = false;
         }
 
         else if (score == 25)
@@ -226,19 +235,20 @@ public class playerScore : MonoBehaviour
         }
     }
 
-    IEnumerator shrinkFoodAnimation(float time) //ienumerator to change to bonus phase
+    IEnumerator shrinkFoodAnimation(float time) //animation for the food
     {
         foodAnimator.SetBool("isTriggered", true);
         yield return new WaitForSeconds(0.75f);
     }
 
-    IEnumerator lostHatAnimation(float time) //ienumerator to change to bonus phase
+    IEnumerator lostHatAnimation(float time) //animation
+
     {
         hatAnimator.SetBool("lostLifeAnim", true);
         yield return new WaitForSeconds(0.75f);
     }
 
-    IEnumerator getHatAnimation2(float time) //ienumerator to change to bonus phase
+    IEnumerator getHatAnimation2(float time) //animation
     {
         
         hatAnimator.SetBool("getLifeAnim", true);
@@ -247,7 +257,7 @@ public class playerScore : MonoBehaviour
         hatAnimator.SetBool("lostLifeAnim", false);
     }
 
-    IEnumerator getHatAnimation1(float time) //ienumerator to change to bonus phase
+    IEnumerator getHatAnimation1(float time) //get animation
     {
         hatAnimator2.SetBool("getLifeAnim", true);
         yield return new WaitForSeconds(0.75f);
@@ -283,7 +293,7 @@ public class playerScore : MonoBehaviour
         }         
     }
 
-    IEnumerator isNowImmuneFlashing(float time) //ienumerator to change to bonus phase
+    IEnumerator isNowImmuneFlashing(float time) //flashing color
     {
         chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(.25f);
@@ -320,14 +330,14 @@ public class playerScore : MonoBehaviour
     }
 
 
-    IEnumerator isNowImmune(float time) //ienumerator to change to bonus phase
+    IEnumerator isNowImmune(float time) //changing to immune
     {     
         isImmune = true;
         yield return new WaitForSeconds(3);
         isImmune = false;
     }
 
-    IEnumerator fadeInFadeOut(float time) //ienumerator to change to bonus phase
+    IEnumerator fadeInFadeOut(float time) //fade animation
     {
         goldBorder.CrossFadeAlpha(0.75f, 1, false);
         yield return new WaitForSeconds(1); 
@@ -358,6 +368,9 @@ public class playerScore : MonoBehaviour
     {
 
         //bonusMusicAnim.Play("Base Layer.audioFadeIn3", 0, 2f);
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
+
         bonusMusic.Play();
         musicBox.Pause();
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
@@ -391,13 +404,18 @@ public class playerScore : MonoBehaviour
 
         totalTime = 10; //resetting the tick tock clock
 
-          
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
+
     }
 
     IEnumerator changeToBonusLevel2(float time) //ienumerator to change to bonus phase
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -434,6 +452,8 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
 
         totalTime = 10; //resetting the tick tock clock
     }
@@ -442,6 +462,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -483,6 +505,9 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
 
         totalTime = 10; //resetting the tick tock clock
     }
@@ -491,6 +516,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -533,6 +560,9 @@ public class playerScore : MonoBehaviour
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
+
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
 
         totalTime = 10; //resetting the tick tock clock
     }
@@ -541,6 +571,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -585,6 +617,9 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
         totalTime = 10; //resetting the tick tock clock
     }
 
@@ -592,6 +627,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -638,6 +675,9 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
         totalTime = 10; //resetting the tick tock clock
     }
 
@@ -645,6 +685,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -694,6 +736,9 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
         totalTime = 10; //resetting the tick tock clock
     }
 
@@ -701,6 +746,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -753,6 +800,9 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
         totalTime = 10; //resetting the tick tock clock
     }
 
@@ -760,6 +810,8 @@ public class playerScore : MonoBehaviour
     {
         bonusMusic.Play();
         musicBox.Pause();
+        normalBackground.SetActive(false);
+        bonusBackground.SetActive(true);
 
         Spawner.stopSpawning = true; //this will tell the main spawner to stop spawning by changing variable in that script
         Spawner2.stopSpawning = true;
@@ -811,11 +863,14 @@ public class playerScore : MonoBehaviour
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
 
+        normalBackground.SetActive(true);
+        bonusBackground.SetActive(false);
+
         totalTime = 10; //resetting the tick tock clock
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) //if space is pressed the game will pause by turning time scale off
         {
             if (paused == false)
             {
@@ -832,7 +887,7 @@ public class playerScore : MonoBehaviour
             }
         }
 
-        else if (clockSwitch == 1)
+        else if (clockSwitch == 1) //checking the clock to convert to the minutes and seconds and resetting to 0
         {
             totalTime -= Time.deltaTime;
 

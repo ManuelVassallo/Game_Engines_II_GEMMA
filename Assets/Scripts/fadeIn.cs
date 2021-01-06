@@ -9,7 +9,7 @@ public class fadeIn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goldBorder.canvasRenderer.SetAlpha(0.0f);
+        goldBorder.canvasRenderer.SetAlpha(0.0f); //fading from 0 and fading to 1 in 2 seconds
 
         fadeInFunction();
        

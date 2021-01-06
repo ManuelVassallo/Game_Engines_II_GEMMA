@@ -8,7 +8,7 @@ public class sceneManager : MonoBehaviour
 {
 
     private Animator buttonAnim;
-    private AudioSource buttonHoverNoise;
+    private AudioSource buttonHoverNoise; //getting sources
     private AudioSource buttonClickNoise;
 
     public void Start()
@@ -19,7 +19,10 @@ public class sceneManager : MonoBehaviour
 
     public void runGame()
     {
+        Spawner.spawnAgain = true; //resetting the game started and spawn again variables to reset the game properly
+        Spawner.gameStarted = false;
         SceneManager.LoadScene("Game");
+
 
     }
 
@@ -50,7 +53,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonClickSound()
     {
-        buttonClickNoise = GameObject.FindGameObjectWithTag("buttonClickSound").GetComponent<AudioSource>();
+        buttonClickNoise = GameObject.FindGameObjectWithTag("buttonClickSound").GetComponent<AudioSource>(); //click noise on click
 
         buttonClickNoise.Play();
 
@@ -58,7 +61,7 @@ public class sceneManager : MonoBehaviour
 
     public void scoreBackAnim()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>(); //getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("scoreBackAnim");
@@ -68,7 +71,7 @@ public class sceneManager : MonoBehaviour
 
     public void scoreBackAnim2()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("scoreBackAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -76,7 +79,7 @@ public class sceneManager : MonoBehaviour
 
     public void scoreMenuButtonAnim()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("menuButton").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("menuButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("scoreMenuButtonAnim");
@@ -86,7 +89,7 @@ public class sceneManager : MonoBehaviour
 
     public void scoreMenuButtonAnim2()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("menuButton").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("menuButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("scoreMenuButtonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -94,7 +97,7 @@ public class sceneManager : MonoBehaviour
 
     public void playAgainButton()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("againButton").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("againButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("againButtonAnim");
@@ -104,7 +107,7 @@ public class sceneManager : MonoBehaviour
 
     public void playAgainButton2()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("againButton").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("againButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("againButtonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -112,7 +115,7 @@ public class sceneManager : MonoBehaviour
 
     public void playNextButtonAnim()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("nextButton").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("nextButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("nextButtonAnim");
@@ -122,7 +125,7 @@ public class sceneManager : MonoBehaviour
 
     public void playNextButtonAnim2()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("nextButton").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("nextButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("nextButtonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -130,7 +133,7 @@ public class sceneManager : MonoBehaviour
 
     public void playBackButtonAnim()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("backButtonAnim");
@@ -140,7 +143,7 @@ public class sceneManager : MonoBehaviour
 
     public void playBackButtonAnim2()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("backButtonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -148,7 +151,7 @@ public class sceneManager : MonoBehaviour
 
     public void playBackButtonAnim3()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("backButtonAnim3");
@@ -158,7 +161,7 @@ public class sceneManager : MonoBehaviour
 
     public void playBackButtonAnim4()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonBack").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("backButtonAnim4");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -166,7 +169,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonAnim()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonHowTo").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonHowTo").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("buttonAnim");
@@ -176,7 +179,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonAnim2()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonHowTo").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonHowTo").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("buttonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -184,7 +187,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonAnim3()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonHelp").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonHelp").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("buttonAnim");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -193,7 +196,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonAnim4()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonHelp").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonHelp").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("buttonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -202,7 +205,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonAnim5()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonPlay").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonPlay").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("buttonAnim");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();
@@ -211,7 +214,7 @@ public class sceneManager : MonoBehaviour
 
     public void playButtonAnim6()
     {
-        buttonAnim = GameObject.FindGameObjectWithTag("buttonPlay").GetComponent<Animator>();
+        buttonAnim = GameObject.FindGameObjectWithTag("buttonPlay").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonAnim.Play("buttonAnim2");
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
         buttonHoverNoise.Play();

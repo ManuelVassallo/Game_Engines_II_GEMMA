@@ -25,6 +25,8 @@ TagManager:
   - nextButton
   - againButton
   - menuButton
+  - scoreMusicBox
+  - mainMenuMusicBox
   layers:
   - Default
   - TransparentFX

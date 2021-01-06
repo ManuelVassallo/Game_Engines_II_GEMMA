@@ -17,6 +17,8 @@ public class Spawner : MonoBehaviour
 
     public static bool gameStarted = false;
 
+    public static bool playAgain = false;
+
     private float minSpawnTime = 1;
     private float maxSpawnTime = 2;
     void Awake()
@@ -25,13 +27,15 @@ public class Spawner : MonoBehaviour
 
         x1 = transform.position.x - col.bounds.size.x / 2f; //getting the boundaries from left and right
         x2 = transform.position.x + col.bounds.size.x / 2f;
-
+        Debug.Log("Game is starting again");
         
+        
+
     }
 
     private void Start()
     {
-        StartCoroutine(gameStartingUp(1f));
+        
     }
 
     IEnumerator gameStartingUp(float time) //ienumerator to change to bonus phase
@@ -52,6 +56,14 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Right now the play again is: " + playAgain);
+        if (playAgain == false) //checking if the player is playing again or not
+        {
+            Debug.Log("I got in");
+            StartCoroutine(gameStartingUp(1f));
+            playAgain = true;
+        }
+
         if (stopSpawning == true)
         {
             CancelInvoke("spawnNeeds"); //if the variable is true then the loop ends
@@ -68,6 +80,7 @@ public class Spawner : MonoBehaviour
             {
                 InvokeRepeating("spawnNeeds", minSpawnTime, maxSpawnTime); //re runs the function
                 spawnAgain = false; //set back to false so the function doesnt run more than once
+
             }
 
         }

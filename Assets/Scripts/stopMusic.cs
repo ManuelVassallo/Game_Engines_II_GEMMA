@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class stopMusic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        Debug.Log(musicSceneChange.mainMenuStartedPlaying);
+        Debug.Log(musicSceneChange2.scoreScreenStartedPlaying);
 
-        musicSceneChange.Instance.gameObject.GetComponent<AudioSource>().Stop();
-        
-    }
+        if (musicSceneChange2.scoreScreenStartedPlaying == true && musicSceneChange.mainMenuStartedPlaying == false) //if player is coming from scorescreen this will stop the scorescreen music 
+        {
+            Debug.Log("it got here tho");
+            musicSceneChange2.Instance.gameObject.GetComponent<AudioSource>().Stop();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        else if (musicSceneChange.mainMenuStartedPlaying == true) //if player is coming from main menu will stop the main menu music
+        {
+            Debug.Log("it got here");
+            musicSceneChange.Instance.gameObject.GetComponent<AudioSource>().Stop();
+        }
+
+        else
+        {
+
+        }
     }
 }

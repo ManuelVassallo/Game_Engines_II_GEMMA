@@ -14,8 +14,13 @@ public class needSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(spawnNeeds());
         
+        
+    }
+
+    private void Awake()
+    {
+        StartCoroutine(spawnNeeds());
     }
 
     IEnumerator spawnNeeds()

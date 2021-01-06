@@ -36,36 +36,21 @@ public class Movement : MonoBehaviour
 
     public Animator animator;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        transform.localEulerAngles = new Vector3(0, 180, 0);
+        transform.localEulerAngles = new Vector3(0, 180, 0); //getting the facing right position
     }
 
-    // Update is called once per frame
     void Update() //updating all the time
     {
         
-        playerX = transform.position.x;
+        playerX = transform.position.x; //setting the x position all the time
 
         Vector3 mouse = cam.ScreenToWorldPoint(Input.mousePosition);
-        mouseX = mouse.x;
-        //Debug.Log(mouseXTotal);
-        //Debug.Log(playerX);
-        /*
-        if (mouseXTotal == playerX)
-        {
-            animator.SetFloat("Speed", 0f);
-        }
-
-        else if (mouseXTotal != playerX)
-        {
-            animator.SetFloat("Speed", 1f);
-        }*/
+        mouseX = mouse.x; //getting the cursor x position at all time
 
 
-        if (mouseX > transform.position.x)
+        if (mouseX > transform.position.x) //checking if mouse x is higher than player position, that means the cursor is at the right of the player else on the left
         {
             isFacingRight = true;
             transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -91,13 +76,11 @@ public class Movement : MonoBehaviour
 
         if(isFacingRight == true)
         {
-            //animator.SetFloat("Speed", 1f);
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(mouseX - .1f, transform.position.y, transform.position.z), speed * Time.deltaTime); //move towards mouse position with the use of time and speed
         }
 
         else if(isFacingRight == false)
         {
-            //animator.SetFloat("Speed", 1f);
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(mouseX + .1f, transform.position.y, transform.position.z), speed * Time.deltaTime); //move towards mouse position with the use of time and speed
         }
 
