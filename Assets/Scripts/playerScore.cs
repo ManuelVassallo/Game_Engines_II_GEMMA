@@ -71,6 +71,7 @@ public class playerScore : MonoBehaviour
     public GameObject chipTheMonkey;
 
     public GameObject pauseText;
+    public GameObject escText;
     public GameObject startText;
 
     public Text text;
@@ -876,6 +877,7 @@ public class playerScore : MonoBehaviour
             {
                 paused = true;
                 pauseText.gameObject.SetActive(true);
+                escText.gameObject.SetActive(true);
                 Time.timeScale = 0;
             }
 
@@ -883,7 +885,16 @@ public class playerScore : MonoBehaviour
             {
                 paused = false;
                 pauseText.gameObject.SetActive(false);
+                escText.gameObject.SetActive(false);
                 Time.timeScale = 1;
+            }
+        }
+
+        if (Input.GetKey("escape")) //if space is pressed the game will pause by turning time scale off
+        {
+            if (paused == true)
+            {
+                Application.Quit();
             }
         }
 

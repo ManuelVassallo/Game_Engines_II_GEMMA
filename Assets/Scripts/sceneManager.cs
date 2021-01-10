@@ -20,6 +20,7 @@ public class sceneManager : MonoBehaviour
     public void runGame()
     {
         Spawner.spawnAgain = true; //resetting the game started and spawn again variables to reset the game properly
+        Spawner.playAgain = false;
         Spawner.gameStarted = false;
         SceneManager.LoadScene("Game");
 
@@ -31,6 +32,11 @@ public class sceneManager : MonoBehaviour
         SceneManager.LoadScene("howToPlay");
     }
 
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+
     public void runMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
@@ -39,6 +45,11 @@ public class sceneManager : MonoBehaviour
     public void runExplainMenu()
     {
         SceneManager.LoadScene("ExplanationStart");
+    }
+
+    public void runCredits()
+    {
+        SceneManager.LoadScene("CreditsEnd");
     }
 
     public void runExplainEnd()
@@ -115,11 +126,28 @@ public class sceneManager : MonoBehaviour
 
     public void playNextButtonAnim()
     {
+        Debug.Log("i got in");
         buttonAnim = GameObject.FindGameObjectWithTag("nextButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
         buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
 
         buttonAnim.Play("nextButtonAnim");
         buttonHoverNoise.Play();
+
+    }
+
+    public void onClicked()
+    {
+        Debug.Log("clicked");
+    }
+
+    public void playNextButtonAnim3()
+    {
+        Debug.Log("i got in");
+        //buttonAnim = GameObject.FindGameObjectWithTag("nextButton").GetComponent<Animator>();//getting the game object button and playing the animation and sound on hover and out hover
+        //buttonHoverNoise = GameObject.FindGameObjectWithTag("buttonHoverSound").GetComponent<AudioSource>();
+
+       // buttonAnim.Play("nextButtonAnim");
+        //buttonHoverNoise.Play();
 
     }
 

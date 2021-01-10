@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ScoreScreen.unity
     guid: 92aa7adc24eede941a4097abac3d1368
   - enabled: 1
+    path: Assets/Scenes/CreditsEnd.unity
+    guid: 1a094fe6f018f3c448fe9824f82d1374
+  - enabled: 1
     path: Assets/Scenes/ExplanationEnd.unity
     guid: 8288d869e1d832944a25ffb081db68a6
   m_configObjects: {}
