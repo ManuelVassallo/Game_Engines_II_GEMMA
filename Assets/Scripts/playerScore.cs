@@ -64,6 +64,17 @@ public class playerScore : MonoBehaviour
 
     public int clockSwitch = 0;
 
+    private bool bonusLevel2 = false;
+    private bool bonusLevel3 = false;
+    private bool bonusLevel4 = false;
+    private bool bonusLevel5 = false;
+    private bool bonusLevel6 = false;
+    private bool bonusLevel7 = false;
+    private bool bonusLevel8 = false;
+    private bool bonusLevel9 = false;
+
+    private bool isBonusActive = false;
+
     public GameObject clockCountdownObject;
 
     public GameObject chipHat1;
@@ -132,7 +143,7 @@ public class playerScore : MonoBehaviour
             itemNoise.Play();
             Destroy(target.gameObject);
             scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
-            score++;
+            score = score + 3;
             checkBonusLevel();
             scoreText.text = score.ToString();
 
@@ -142,11 +153,23 @@ public class playerScore : MonoBehaviour
 
         if (target.tag == "Want") //if player collides with a want, more points is awarded
         {
-            itemNoise.Play();
-            Destroy(target.gameObject);
-            scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
-            score = score + 2;
-            scoreText.text = score.ToString();
+            if (isBonusActive == true)
+            {
+                itemNoise.Play();
+                Destroy(target.gameObject);
+                scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
+                score = score + 3;
+                scoreText.text = score.ToString();
+            }
+            else if(isBonusActive == false)
+            {
+                itemNoise.Play();
+                Destroy(target.gameObject);
+                scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
+                score++;
+                scoreText.text = score.ToString();
+            }
+            
 
             
         }
@@ -181,60 +204,77 @@ public class playerScore : MonoBehaviour
 
     void checkBonusLevel()
     {
-        if (score == 5)
+        if (score == 15)
         {         
             StartCoroutine(changeToBonusLevel1(1f));  //run coroutine to switch to bonus phase if certain points is reached    
             popUpPrefab1.gameObject.SetActive(true);
+            isBonusActive = true;
             musicSceneChange2.scoreScreenStartedPlaying = false;
             musicSceneChange.mainMenuStartedPlaying = false;
         }
 
-        else if (score == 25)
+        else if (score >= 75 && bonusLevel2 == false)
         {
             StartCoroutine(changeToBonusLevel2(1f));  //run coroutine to switch to bonus phase if certain points is reached  
             popUpPrefab2.gameObject.SetActive(true);
+            bonusLevel2 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 70)
+        else if (score >= 150 && bonusLevel3 == false)
         {
             StartCoroutine(changeToBonusLevel3(1f));  //run coroutine to switch to bonus phase if certain points is reached 
             popUpPrefab3.gameObject.SetActive(true);
+            bonusLevel3 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 120)
+        else if (score >= 250 && bonusLevel4 == false)
         {
             StartCoroutine(changeToBonusLevel4(1f));  //run coroutine to switch to bonus phase if certain points is reached 
             popUpPrefab1.gameObject.SetActive(true);
+            bonusLevel4 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 175)
+        else if (score >= 400 && bonusLevel5 == false)
         {
             StartCoroutine(changeToBonusLevel5(1f));  //run coroutine to switch to bonus phase if certain points is reached  
             popUpPrefab2.gameObject.SetActive(true);
+            bonusLevel5 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 250)
+        else if (score >= 550 && bonusLevel6 == false)
         {
             StartCoroutine(changeToBonusLevel6(1f));  //run coroutine to switch to bonus phase if certain points is reached 
             popUpPrefab3.gameObject.SetActive(true);
+            bonusLevel6 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 320)
+        else if (score >= 700 && bonusLevel7 == false)
         {
             StartCoroutine(changeToBonusLevel7(1f));  //run coroutine to switch to bonus phase if certain points is reached  
             popUpPrefab1.gameObject.SetActive(true);
+            bonusLevel7 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 400)
+        else if (score >= 900 && bonusLevel8 == false)
         {
             StartCoroutine(changeToBonusLevel8(1f));  //run coroutine to switch to bonus phase if certain points is reached  
             popUpPrefab2.gameObject.SetActive(true);
+            bonusLevel8 = true;
+            isBonusActive = true;
         }
 
-        else if (score == 500)
+        else if (score >= 1100 && bonusLevel9 == false)
         {
             StartCoroutine(changeToBonusLevel9(1f));  //run coroutine to switch to bonus phase if certain points is reached  
             popUpPrefab3.gameObject.SetActive(true);
+            bonusLevel9 = true;
+            isBonusActive = true;
         }
     }
 
@@ -399,7 +439,8 @@ public class playerScore : MonoBehaviour
         musicBox.Play();
 
         Spawner.spawnAgain = true; //this will tell the regular spawner to start spawning again
-        Spawner2.spawnAgain= true;      
+        Spawner2.spawnAgain= true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -451,6 +492,7 @@ public class playerScore : MonoBehaviour
         Spawner2.spawnAgain = true; 
         
         bombSpawner.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -504,6 +546,7 @@ public class playerScore : MonoBehaviour
         Spawner3.spawnAgain = true; 
 
         bombSpawner.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -560,6 +603,7 @@ public class playerScore : MonoBehaviour
         Spawner3.spawnAgain = true;
 
         bombSpawner.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -616,6 +660,7 @@ public class playerScore : MonoBehaviour
 
         bombSpawner.spawnAgain = true;
         bombSpawner2.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -674,6 +719,7 @@ public class playerScore : MonoBehaviour
         bombSpawner.spawnAgain = true;
         bombSpawner2.spawnAgain = true;
         bombSpawner3.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -735,6 +781,7 @@ public class playerScore : MonoBehaviour
         bombSpawner.spawnAgain = true;
         bombSpawner2.spawnAgain = true;
         bombSpawner3.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -799,6 +846,7 @@ public class playerScore : MonoBehaviour
         bombSpawner.spawnAgain = true;
         bombSpawner2.spawnAgain = true;
         bombSpawner3.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
@@ -862,6 +910,7 @@ public class playerScore : MonoBehaviour
         bombSpawner.spawnAgain = true;
         bombSpawner2.spawnAgain = true;
         bombSpawner3.spawnAgain = true;
+        isBonusActive = false;
 
         clockSwitch = 0; //switching
         timeClockText.SetActive(false);
