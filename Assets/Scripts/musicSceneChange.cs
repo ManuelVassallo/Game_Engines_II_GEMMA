@@ -7,6 +7,8 @@ public class musicSceneChange : MonoBehaviour
 
     private AudioSource playMainMenuMusic;
     public static bool mainMenuStartedPlaying = false;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +23,10 @@ public class musicSceneChange : MonoBehaviour
 
     void Awake()
     {
+        
         if (mainMenuStartedPlaying == false) //checking if score screen is playing
         {
+            
             playMainMenuMusic = GameObject.FindGameObjectWithTag("mainMenuMusicBox").GetComponent<AudioSource>(); //play music if the main menu isnt playing
             playMainMenuMusic.Play();
             mainMenuStartedPlaying = true;
@@ -30,10 +34,24 @@ public class musicSceneChange : MonoBehaviour
 
         if (instance != null && instance != this) //checking if the instance is playing or not
         {
-            Destroy(this.gameObject);
+            if (stopMusic.cameFromGame == false)
+            {
+                Destroy(this.gameObject);
+                Debug.Log("Came from game3333");
+            }
+
+            else if(stopMusic.cameFromGame == true)
+            {
+                Debug.Log("Came from game");
+                playMainMenuMusic = GameObject.FindGameObjectWithTag("mainMenuMusicBox").GetComponent<AudioSource>(); //play music if the main menu isnt playing
+                playMainMenuMusic.Play();
+                stopMusic.cameFromGame = false;
+            }
+            
 
             if (mainMenuStartedPlaying == false)
             {
+                
                 playMainMenuMusic = GameObject.FindGameObjectWithTag("scoreMusicBox").GetComponent<AudioSource>();
                 playMainMenuMusic.Play(); //play music
                 mainMenuStartedPlaying = true;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4116424119495959787}
   m_Layer: 0
   m_Name: Ketchup
-  m_TagString: Need
+  m_TagString: Want
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

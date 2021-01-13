@@ -42,6 +42,8 @@ public class playerScore : MonoBehaviour
     public GameObject popUpPrefab5;
     public GameObject popUpPrefab6;
 
+    public GameObject pauseSquare;
+
     public GameObject normalBackground;
     public GameObject bonusBackground;
 
@@ -876,6 +878,7 @@ public class playerScore : MonoBehaviour
             if (paused == false)
             {
                 paused = true;
+                pauseSquare.gameObject.SetActive(true);
                 pauseText.gameObject.SetActive(true);
                 escText.gameObject.SetActive(true);
                 Time.timeScale = 0;
@@ -884,6 +887,7 @@ public class playerScore : MonoBehaviour
             else if (paused == true)
             {
                 paused = false;
+                pauseSquare.gameObject.SetActive(false);
                 pauseText.gameObject.SetActive(false);
                 escText.gameObject.SetActive(false);
                 Time.timeScale = 1;
@@ -894,7 +898,10 @@ public class playerScore : MonoBehaviour
         {
             if (paused == true)
             {
-                Application.Quit();
+                Time.timeScale = 1;
+                stopMusic.cameFromGame = true;
+                SceneManager.LoadScene("MainMenu");
+
             }
         }
 

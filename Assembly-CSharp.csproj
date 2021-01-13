@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\musicSceneChange.cs" />
     <Compile Include="Assets\Scripts\musicSceneChange2.cs" />
+    <Compile Include="Assets\Scripts\musicSceneChange3.cs" />
     <Compile Include="Assets\Scripts\needSpawner.cs" />
     <Compile Include="Assets\Scripts\onSpawn.cs" />
     <Compile Include="Assets\Scripts\playerScore.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Scripts\spawnerBonus4.cs" />
     <Compile Include="Assets\Scripts\stopMusic.cs" />
     <Compile Include="Assets\Scripts\stopMusic2.cs" />
+    <Compile Include="Assets\Scripts\timerCredits.cs" />
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/6.3A/Game Engines/Shop Drop/Game_Engines_II_GEMMA/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
