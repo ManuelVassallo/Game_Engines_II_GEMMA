@@ -16,7 +16,7 @@ public class timerCredits : MonoBehaviour
 
     IEnumerator switchToEndScene(float time) //ienumerator to change to bonus phase
     {
-        yield return new WaitForSeconds(10f); //for 10 seconds the bonus phase will last
+        yield return new WaitForSeconds(12f); //for 10 seconds the bonus phase will last
         SceneManager.LoadScene("ExplanationEnd");
     }
 
