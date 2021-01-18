@@ -27,6 +27,7 @@ TagManager:
   - menuButton
   - scoreMusicBox
   - mainMenuMusicBox
+  - ItemSound2
   layers:
   - Default
   - TransparentFX

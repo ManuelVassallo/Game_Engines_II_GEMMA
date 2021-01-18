@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-F:/6.3A/Game Engines/Shop Drop/Game_Engines_II_GEMMA/Exported Game/Shop Drop.exe
+F:/6.3A/Game Engines/Shop Drop/Exported Game/Shop Drop.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/howToPlay.unity

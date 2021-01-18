@@ -23,6 +23,7 @@ public class playerScore : MonoBehaviour
 
     private AudioSource hurtNoise;
     private AudioSource itemNoise;
+    private AudioSource itemNoise2;
     private AudioSource chanceNoise;
     private AudioSource bonusMusic;
     private AudioSource musicBox;
@@ -64,6 +65,9 @@ public class playerScore : MonoBehaviour
 
     public int clockSwitch = 0;
 
+    private int randomNeedNum;
+
+    private bool bonusLevel1 = false;
     private bool bonusLevel2 = false;
     private bool bonusLevel3 = false;
     private bool bonusLevel4 = false;
@@ -104,6 +108,7 @@ public class playerScore : MonoBehaviour
 
         hurtNoise = GameObject.FindGameObjectWithTag("HurtSound").GetComponent<AudioSource>(); //getting audio sources from game objects
         itemNoise = GameObject.FindGameObjectWithTag("ItemSound").GetComponent<AudioSource>();
+        itemNoise2 = GameObject.FindGameObjectWithTag("ItemSound2").GetComponent<AudioSource>();
         chanceNoise = GameObject.FindGameObjectWithTag("ChanceSound").GetComponent<AudioSource>();
         bonusMusic = GameObject.FindGameObjectWithTag("BonusSound").GetComponent<AudioSource>();
         musicBox = GameObject.FindGameObjectWithTag("musicBox").GetComponent<AudioSource>();
@@ -143,9 +148,15 @@ public class playerScore : MonoBehaviour
             itemNoise.Play();
             Destroy(target.gameObject);
             scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
-            score = score + 3;
+            randomNeedNum = UnityEngine.Random.Range(3, 6); //creatign a random number
+            score = score + randomNeedNum;
+            
             checkBonusLevel();
             scoreText.text = score.ToString();
+            //chipTheMonkey.GetComponent<Renderer>().material.color = Color.red;
+            StartCoroutine(textFlash(1f));
+            
+
 
             
 
@@ -155,18 +166,21 @@ public class playerScore : MonoBehaviour
         {
             if (isBonusActive == true)
             {
-                itemNoise.Play();
+                itemNoise2.Play();
+                StartCoroutine(textFlash(1f));
                 Destroy(target.gameObject);
                 scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
-                score = score + 3;
+                randomNeedNum = UnityEngine.Random.Range(3, 6); //creatign a random number
+                score = score + randomNeedNum;
                 scoreText.text = score.ToString();
             }
             else if(isBonusActive == false)
             {
                 itemNoise.Play();
+                StartCoroutine(textFlashRed(1f));
                 Destroy(target.gameObject);
                 scoreAnimator.Play("Base Layer.scoreText", 0, 0.25f);
-                score++;
+                score = score - 1;
                 scoreText.text = score.ToString();
             }
             
@@ -204,11 +218,12 @@ public class playerScore : MonoBehaviour
 
     void checkBonusLevel()
     {
-        if (score == 15)
+        if (score >= 15 && bonusLevel1 == false)
         {         
             StartCoroutine(changeToBonusLevel1(1f));  //run coroutine to switch to bonus phase if certain points is reached    
             popUpPrefab1.gameObject.SetActive(true);
             isBonusActive = true;
+            bonusLevel1 = true;
             musicSceneChange2.scoreScreenStartedPlaying = false;
             musicSceneChange.mainMenuStartedPlaying = false;
         }
@@ -372,6 +387,22 @@ public class playerScore : MonoBehaviour
 
     }
 
+    IEnumerator textFlash(float time) //flashing color
+    {
+        scoreText.GetComponent<Text>().color = Color.green;
+        yield return new WaitForSeconds(.5f);
+        scoreText.GetComponent<Text>().color = new Color32(60, 17, 19, 255);
+    }
+
+    IEnumerator textFlashRed(float time) //flashing color
+    {
+        scoreText.GetComponent<Text>().color = Color.red;
+        yield return new WaitForSeconds(.5f);
+        scoreText.GetComponent<Text>().color = new Color32(60, 17, 19, 255);
+    }
+
+
+
 
     IEnumerator isNowImmune(float time) //changing to immune
     {     
@@ -501,6 +532,8 @@ public class playerScore : MonoBehaviour
         bonusBackground.SetActive(false);
 
         totalTime = 10; //resetting the tick tock clock
+
+        yield return new WaitForSeconds(2f); //for 3 seconds the bonus phase will last 
     }
 
     IEnumerator changeToBonusLevel3(float time) //ienumerator to change to bonus phase
